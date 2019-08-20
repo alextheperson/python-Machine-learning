@@ -13,7 +13,7 @@ sentence_tokens = nltk.sent_tokenize(raw)
 lemmer = nltk.stem.WordNetLemmatizer()
 
 def lemTokens(tokens):
-    return[lemmer.lemmatize(tokens) for token in tokens]
+    return[lemmer.lemmatize(token) for token in tokens]
 
 remove_punct_dict = dict((ord(punct), None) for punct in string.punctuation)
 
@@ -38,7 +38,7 @@ def response(userInput):
     tfidf = Tfidvec.fit_transform(sentence_tokens)
 
     vals = cosine_similarity(tfidf[-1], tfidf)
-    flat = valls.flatten()
+    flat = vals.flatten()
 
     idx = flat.argsort()[-2]
 

@@ -10,6 +10,7 @@ class Fly {
         this.fitness = 0;
         this.hitSomething = false
         this.img = loadImage("HouseFly2_.png")
+        this.hitFood = false
     }
 
     calcFitness(){
@@ -48,6 +49,7 @@ class Fly {
         let distance = dist(this.pos.x, this.pos.y, this.food.pos.x, this.food.pos.y);
         if(distance < this.food.radius){
             this.hitSomething = true
+            this.hitFood = true
         }
 
         this.calcFitness();
@@ -61,10 +63,11 @@ class Fly {
         push();
         noStroke();
         translate(this.pos.x, this.pos.y);
-        fill(255, 255, 255, 150)
-        text(this.fitness.toFixed(1), 0, 0)
-        rotate(this.vel.heading())
-        fill(0, 0, 0, 150)
+        fill(255, 255, 255, 150);
+        textSize(10);
+        text(this.fitness.toFixed(1), 0, 0);
+        rotate(this.vel.heading());
+        fill(0, 0, 0, 150);
         //rectMode(CENTER)
         //rect(0, 0, 25, 15);
         image(this.img, 0, 0, 25, 25)

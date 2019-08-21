@@ -20,7 +20,7 @@ class DNA {
 
             if(mutationRate > ifmutate){
                 tempGenes[i] = p5.Vector.random2D();
-                tempGenes[i] = setMag(0.1);
+                tempGenes[i].setMag(0.1);
             }
         }
         this.genes = tempGenes;

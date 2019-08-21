@@ -48,6 +48,8 @@ class Fly {
         if(distance < this.food.radius){
             this.hitSomething = true
         }
+
+        this.calcFitness();
     }
     
     applyForce(force){
@@ -58,6 +60,8 @@ class Fly {
         push();
         noStroke();
         translate(this.pos.x, this.pos.y);
+        fill(255, 255, 255, 150)
+        text(this.fitness.toFixed(1), 0, 0)
         rotate(this.vel.heading())
         fill(0, 0, 0, 150)
         rectMode(CENTER)

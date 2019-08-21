@@ -8,7 +8,7 @@ class Wall {
     show(){
         push();
         noStroke();
-        fill(255, 0, 0);
+        fill(255, 55, 55);
         translate(this.pos.x, this.pos.y);
         rectMode(CENTER);
         rect(0, 0, this.w, this.h);

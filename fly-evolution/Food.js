@@ -8,7 +8,7 @@ class Food {
         push();
         noStroke();
         translate(this.pos.x, this.pos.y);
-        fill(0, 255, 0);
+        fill(55, 255, 55);
         ellipse(0, 0, this.radius, this.radius);
         pop();
 

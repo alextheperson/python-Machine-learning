@@ -5,22 +5,31 @@ const PUNISH_DIV = 3; // punishment for hitting things
 const MUTATION = 0.1; // the mutation rate
 
 let count = 0
-let fly, food, wall;
+let food, wall;
+
+let flies = [];
 
 function setup() {
     createCanvas(640, 480);
-
-    fly = new Fly(LIFE_SPAN);
+    
     food = new Food(width/2, 50, 30);
     wall = new Wall(width/2, height - height/3, 300, 30);
+
+    for(let i = 0; i < POPULATION; i++){
+        flies[i] = new Fly(LIFE_SPAN, REWARD_MULT, PUNISH_DIV, food)
+    }
 }
 
 function draw() {
-    background(0, 0, 255)
+    background(55, 55, 255)
 
-    fly.update(count);
-    fly.show();
-    
+    for(let i = 0; i < POPULATION; i++){
+            flies[i].update(count, wall);
+            flies[i].show();
+    }
+
+
+
     food.show();
 
     wall.show();

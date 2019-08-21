@@ -9,6 +9,7 @@ class Fly {
         this.food = food;
         this.fitness = 0;
         this.hitSomething = false
+        this.img = loadImage("HouseFly2_.png")
     }
 
     calcFitness(){
@@ -64,8 +65,9 @@ class Fly {
         text(this.fitness.toFixed(1), 0, 0)
         rotate(this.vel.heading())
         fill(0, 0, 0, 150)
-        rectMode(CENTER)
-        rect(0, 0, 25, 15);
+        //rectMode(CENTER)
+        //rect(0, 0, 25, 15);
+        image(this.img, 0, 0, 25, 25)
         pop();
     }
 }

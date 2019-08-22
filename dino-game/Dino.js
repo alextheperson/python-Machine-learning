@@ -1,5 +1,5 @@
 class Dino {
-    constructor(playerControled) {
+    constructor(playerControled, brain) {
         this.originalWidth = 30;
         this.originalHeight = 50;
         this.width = this.originalWidth;
@@ -11,6 +11,8 @@ class Dino {
         this.playerControled = playerControled;
 
         this.isAlive = true;
+
+        this.brain = brain
     }
 
     calcGround(){
@@ -23,6 +25,10 @@ class Dino {
         
         let groundPos = this.calcGround();
 
+        if(this.playerControled){
+            this.think(colsestCactus);
+        }
+
         if(this.pos.y >= groundPos){
         this.pos.y = groundPos;
         this.vel.y = 0
@@ -30,6 +36,26 @@ class Dino {
 
         if(this.hitCactus(colsestCactus)){
             this.isAlive = false;
+        }
+    }
+
+    think(cactus){
+        let distance = cactus.pos.x - cactus.width / 2 - this.pos.x + this.width / 2;
+
+        let actions = this.brain.predict([distance, cactus.count]);
+
+        let choice = actions.indexOf(Math.max(...actions)); //get the index of best prediction
+
+        if(choice == 0){
+            //jump
+            this.unDuck();
+            this.jump();
+        }else if(choice == 1){
+            //duck
+            this.duck();
+        }
+        else{
+            this.unDuck();
         }
     }
 

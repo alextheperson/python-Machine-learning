@@ -52,14 +52,14 @@ def response(userInput):
         return sentence_tokens[idx]
     return None
 
-print(">>>Hello, small insignifficant human servent what questions do you have about the washington huskies? If you would like to exit my supirior presence, type'bye'")
+print(">>>Hello, small insignifficant human servent what questions do you have about robots? If you would like to exit my supirior presence, type'bye'")
 name = input(">>>What is your name?\n")
 while True:
     userInput = input("user("+name+") $").lower()
     print(">>>", end="")
     if userInput != "bye":
         if greeting(userInput) != None:
-            print(greetings(userInput))
+            print(greeting(userInput))
         else:
             print(response(userInput))
             sentence_tokens.remove(userInput)

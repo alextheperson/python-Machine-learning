@@ -56,15 +56,15 @@ class Dino {
         push();
         noStroke();
         translate(this.pos.x, this.pos.y);
+        fill(83, 83, 83, 255);
+        textAlign(LEFT);
+        textSize(15);
         if(this.playerControled){
-            fill(70, 70, 70, 255);
             text("Player", -60, 0);
-            fill(83, 155, 83, 255);
+            
         }
         else{
-            fill(70, 70, 70, 255);
             text("CPU", -50, 0);
-            fill(83, 155, 83, 255);
         }
         rectMode(CENTER);
         rect(0, 0, this.width, this.height);
@@ -76,12 +76,6 @@ class Dino {
 
         if (this.pos.x + this.width / 2 > cactus.pos.x - cactus.width / 2 && this.pos.x - this.width / 2 < cactus.pos.x + cactusWidth) { // Check X
             if (this.pos.y + this.height / 2 > cactus.pos.y - cactus.height / 2) {
-                push()
-                noStroke();
-                fill(255, 0, 0, 100);
-                rectMode(CENTER);
-                rect(width/2, height/2, width, height);
-                pop();
                 return true;
                 
             }

@@ -18,7 +18,7 @@ class Cactus {
             push();
             noStroke();
             translate(this.pos.x + (this.width + this.spacing) * i, this.pos.y);
-            fill(55, 255, 55, 255);
+            fill(83, 83, 83, 255);
             rectMode(CENTER);
             rect(0, 0, this.width, this.height);
             pop();

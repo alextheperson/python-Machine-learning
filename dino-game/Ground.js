@@ -7,7 +7,7 @@ class Ground {
         push();
         noStroke();
         translate(this.pos.x, this.pos.y);
-        fill(55, 55, 55);
+        fill(153, 102, 51);
         rectMode(CENTER);
         rect(0, 0, width, 1);
         pop();

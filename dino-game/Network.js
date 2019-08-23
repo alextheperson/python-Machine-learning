@@ -24,11 +24,6 @@ class NeuralNetwork {
             activation: 'sigmoid'
         });
         model.add(hidden)
-        const hidden2 = tf.layers.dense({
-            units: this.hiddenNodes,
-            activation: 'sigmoid'
-        });
-        model.add(hidden2);
         const output = tf.layers.dense({
             units: this.outputNodes,
             activation: 'softmax'
@@ -52,5 +47,42 @@ class NeuralNetwork {
 
             return outputs;
         })
+    }
+
+    copy(){
+        return tf.tidy(() => {
+            const modelCopy = this.createModel();
+
+            modelCopy.setWeights(this.model.getWeights());
+
+            return new NeuralNetwork(modelCopy, this.inputNodes, this.hiddenNodes, this.outputNodes);
+        })
+    }
+
+    mutate(rate){
+        tf.tidy(() => {
+            const weights = this.model.getWeights();
+            const mutatedWeights = [];
+
+            for(let i = 0; i < weights.length; i++){
+                let tensor = weights[i];//grab tensor
+                let shape = weights[i].shape;// get tensor values shape
+                let values = tensor.dataSync().slice();//copy tensor values
+
+                for(let j = 0; j < values; j++){
+                    if(random(i) < rate){
+                        let w = values[j];
+                        values[j] = w + randomGaussian();//add random number around 0
+                    }
+                }
+
+                let newTensor = tf.tensor(values, shape);
+
+                mutatedWeights[i] = newTensor;
+            }
+
+            this.model.setWeights(mutatedWeights);
+
+        });
     }
 }

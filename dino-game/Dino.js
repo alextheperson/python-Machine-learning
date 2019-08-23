@@ -13,21 +13,21 @@ class Dino {
         this.isAlive = true;
 
         this.brain = brain
+
+        this.score = 0;
     }
 
     calcGround(){
         return height - height / 4 - this.height/2;//position of the ground - half the height of the dino
     }
     
-    update(colsestCactus){
+    update(colsestCactus, score){
+        this.score = score
+
         this.vel.y += -0.5; //strength of gravity
         this.pos.y -= this.vel.y//apply gravity
         
         let groundPos = this.calcGround();
-
-        if(this.playerControled){
-            this.think(colsestCactus);
-        }
 
         if(this.pos.y >= groundPos){
         this.pos.y = groundPos;
@@ -37,10 +37,18 @@ class Dino {
         if(this.hitCactus(colsestCactus)){
             this.isAlive = false;
         }
+
+        if(!this.playerControled){
+            this.think(colsestCactus);
+        }
     }
 
     think(cactus){
         let distance = cactus.pos.x - cactus.width / 2 - this.pos.x + this.width / 2;
+
+        if(distance <= 0){
+            distance = 0
+        }
 
         let actions = this.brain.predict([distance, cactus.count]);
 
@@ -82,15 +90,15 @@ class Dino {
         push();
         noStroke();
         translate(this.pos.x, this.pos.y);
-        fill(83, 83, 83, 255);
+        fill(83, 83, 83, 100);
         textAlign(LEFT);
         textSize(15);
         if(this.playerControled){
-            text("Player", -60, 0);
+            text("Player", -70, 0);
             
         }
         else{
-            text("CPU", -50, 0);
+            text("CPU", -60, 0);
         }
         rectMode(CENTER);
         rect(0, 0, this.width, this.height);
